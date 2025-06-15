@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <title>צ'אט כמו וואטסאפ</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #e5ddd5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #chat-container {
+      width: 350px;
+      height: 500px;
+      background-color: white;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    #messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+    }
+    .message {
+      background-color: #dcf8c6;
+      margin: 5px 0;
+      padding: 8px 12px;
+      border-radius: 10px;
+      align-self: flex-end;
+      max-width: 80%;
+    }
+    #input-area {
+      display: flex;
+      border-top: 1px solid #ccc;
+    }
+    input {
+      flex: 1;
+      border: none;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      border: none;
+      background-color: #128C7E;
+      color: white;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="chat-container">
+    <div id="messages"></div>
+    <div id="input-area">
+      <input type="text" id="message-input" placeholder="כתוב הודעה...">
+      <button onclick="sendMessage()">שלח</button>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("message-input");
+      const text = input.value.trim();
+      if (text === "") return;
+
+      const messageElement = document.createElement("div");
+      messageElement.classList.add("message");
+      messageElement.textContent = text;
+
+      document.getElementById("messages").appendChild(messageElement);
+      input.value = "";
+      document.getElementById("messages").scrollTop = document.getElementById("messages").scrollHeight;
+    }
+
+    // אפשרות לשלוח עם אנטר
+    document.getElementById("message-input").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") sendMessage();
+    });
+  </script>
+</body>
+</html>
+
